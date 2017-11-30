@@ -4,7 +4,7 @@ $debug = true;
 
 function show_record($dbc, $id) {
 	# Create a query to get the name and price sorted by price
-	$query = 'SELECT id, name, status, location_id, create_date, description, finder, owner FROM stuff WHERE id = ' . $id;
+	$query = 'SELECT * FROM stuff WHERE id = ' . $id;
 
 	# Execute the query
 	$results = mysqli_query($dbc, $query);
