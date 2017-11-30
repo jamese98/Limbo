@@ -7,17 +7,12 @@ Version 0.1 -->
 require('connect_db.php');
 require('limboFunctions.php');
 
-function record_ctrl(){
-	if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
-		$status = $_POST['status'];
+function record_ctrl($status){
 		
-		if ($status == "lost"){
-				insert_lost_record($dbc, $status);
-		}else if ($status == "found"){
-				insert_lost_record($dbc, $status);
-		}else{
-			echo "Not a valid status";
-		}
+	if ($status == "lost"){
+			insert_lost_record($dbc, $status);
+	}else if ($status == "found"){
+			insert_lost_record($dbc, $status);
 	}
 }
 
