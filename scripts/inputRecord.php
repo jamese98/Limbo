@@ -31,7 +31,7 @@ function insert_lost_record($dbc, $status){
 
 function insert_found_record($dbc, $status){
 	$loc = $_GET['location'];
-	$descrp = $_GET'descrp'];
+	$descrp = $_GET['descrp'];
 	$date = $_GET['date'];
 	$room = $_GET['room'];
 	$finder = $_GET['finder'];
