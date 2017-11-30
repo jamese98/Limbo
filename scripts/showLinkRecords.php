@@ -28,7 +28,7 @@ function show_link_records($dbc, $table) {
 	    		echo '<TD>' . $alink . '</TD>';
 	        	echo '<TD>' . ucwords($row['status']) . '</TD>';
 	        	echo '<TD>' . date('m/d/Y', strtotime($row['create_date'])) . '</TD>';
-	        	echo '<TD>' . date('H:i', strtotime($row['create_date'])) . '</TD>';
+	        	//echo '<TD>' . date('H:i', strtotime($row['create_date'])) . '</TD>';
 	        	echo '<TD>' . buildingToName($row['location_id']) . '</TD>';
 	    		echo '</TR>';
 

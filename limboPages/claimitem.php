@@ -1,4 +1,4 @@
-<!-- viewitem.php
+<!-- claimitem.php
 Create a site for Limbo using CSS
 Authors: James Ekstract, Daniel Gisolfi
 Version 0.1 -->
@@ -10,7 +10,6 @@ Version 0.1 -->
 require('../scripts/connect_db.php');
 # Include helper functions
 require('../scripts/limboFunctions.php');
-require('../scripts/showRecord.php');
 ?>
 	<head>
 		<meta charset = "utf-8">
@@ -42,16 +41,15 @@ require('../scripts/showRecord.php');
 	  		<!-- content area -->
 	  		<div id="content_area">
 		   		<div id="iteminfo">
-		   			<h1>Item Info</h1>
+		   			<h1>Claim Item</h1>
 		   			<?php
 		   			# Display information for specified item
 		   			if($_SERVER['REQUEST_METHOD'] == 'GET') {
 		   				if(isset($_GET['id'])) {
-		   					show_record($dbc, $_GET['id']);
-	   						$status = check_status($dbc, $_GET['id']); 
-			   				// update_status($dbc, $_GET['id'], $status);
+		   					$id = $_GET['id'];
+			   				update_status($dbc, $id, "claimed");
+
 		   				}
-		   			}
 		   	// 			if($_SERVER['REQUEST_METHOD'] == 'POST') 
 		   	// 				if(isset($_POST['id'])) {
 						// 		$id = $_POST['id'];
@@ -60,21 +58,14 @@ require('../scripts/showRecord.php');
 						// 		echo '<div id="content_area"><h2>Item Updated</h2></div>';
 						// 	}
 						// }
-		   			// } else if($_SERVER['REQUEST_METHOD'] == 'POST') {
-		   			// 	if(isset($_POST['id'])) {
-
-		   			// 	}
-		   			// }
-
-
+		   			}
 		   			#Close database connection
 		   			mysqli_close($dbc);
 		   			?>
 				  	<br/><br/>
-					<form action="viewitem.php">
-						<input type="hidden" name="id" value=<?php echo $_GET['id']; ?>>
+					<form>
 		   				<input id="button" method="POST" type="Submit" value="Claim">
-		   			</form>
+		   			</form>s
 	  			</div>
 	  		</div>
 	  		<!-- footer -->
