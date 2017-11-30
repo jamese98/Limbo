@@ -19,8 +19,8 @@ function show_record($dbc, $id) {
 		  		echo '<p>Location Found: ' . buildingToName($row['location_id']) . '</p>';
 		  		echo '<p>Date/Time Found: ' . $row['create_date'] . '</p>';
 		  		echo '<p>Description: ' . $row['description'] . '</p>';
-		  		echo '<p>Finder Name: ' . $row['finder_fname'] . '</p>';
-		  		echo '<p>Finder Name: ' . $row['finder_lname'] . '</p>';				
+		  		echo '<p>Finder  First Name: ' . $row['finder_fname'] . '</p>';
+		  		echo '<p>Finder  Last Name: ' . $row['finder_lname'] . '</p>';				
 			} else if($row['status'] == 'lost')	{
 		  		echo '<p>Name: ' . $row['name'] . '</p>';
 		  		echo '<p>Status: ' . ucwords($row['status']) . '</p>';

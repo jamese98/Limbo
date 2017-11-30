@@ -6,8 +6,8 @@ Version 0.1 -->
 <html>
 <?php
 #outputs errors for debugging
-// ini_set('display_errors', TRUE);
-// error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+error_reporting(E_ALL);
 
 require('../scripts/redirect.php');
 require('../scripts/limboFunctions.php');
@@ -64,11 +64,11 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 			</div>
 	  		<!-- content area -->
 	  		<div id="content_area">
-		   		<div id="loginform">
+		   		<div id="entryform">
 		   			<h1>Confirm Login</h1>
 		   			<form action="adminLogin.php" method="POST">
 						<br>User Name:<br>
-		  				<input id="text" name="userName" placeholder="Enter Username" value="">
+		  				<input id="text" name="userName" placeholder="Enter Username" value="<?php if(isset($_POST['userName'])) echo $_POST['userName'];?>">
 		  				<br>Password:<br>
 		  				<input id="text" type="password" name="pw" placeholder="Enter Password" value="">
 		  				<br/>

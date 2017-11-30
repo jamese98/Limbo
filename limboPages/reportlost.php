@@ -5,8 +5,8 @@ Version 0.1 -->
 
 <!DOCTYPE HTML>
 <?php
-// ini_set('display_errors', TRUE);
-// error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+error_reporting(E_ALL);
 
 require('../scripts/inputRecord.php');
 
@@ -94,15 +94,15 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
 				     		<option value="36">Upper West Townhouses </option>
   						</select>
 					  	<br>*Item Name:<br>
-					  	<input id="text" name="name" value="">
+					  	<input id="text" name="name" value="<?php if(isset($_GET['name'])) echo $_GET['name'];?>">
 						<br>Description:<br>
-					  	<input id="text" name="descrp" value="">
+					  	<input id="text" name="descrp" value="<?php if(isset($_GET['descrp'])) echo $_GET['descrp'];?>">
 					  	<br>Room Number:<br>
-					  	<input id="text" name="room" value="">
+					  	<input id="text" name="room" value="<?php if(isset($_GET['room'])) echo $_GET['room'];?>">
 					  	<br>*Owner First Name:<br>
-					  	<input id="text" name="finder_fname" value="">
+					  	<input id="text" name="owner_fname" value="<?php if(isset($_GET['owner_fname'])) echo $_GET['owner_fname'];?>">
 					  	<br>*Owner Last Name:<br>
-					  	<input id="text" name="finder_lname" value="">
+					  	<input id="text" name="owner_lname" value="<?php if(isset($_GET['owner_lname'])) echo $_GET['owner_lname'];?>">
 					  	<br><br>
 					  	<input type="hidden" name="status" value="lost">
 					  	<input id="button" type="submit" value="Submit">

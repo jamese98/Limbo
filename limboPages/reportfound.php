@@ -93,15 +93,15 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
 				     		<option value="36">Upper West Townhouses </option>
   						</select>
 					  	<br>*Item Name:<br>
-					  	<input id="text" name="name" value="">
+					  	<input id="text" name="name" value="<?php if(isset($_GET['name'])) echo $_GET['name'];?>">
 						<br>Description:<br>
-					  	<input id="text" name="descrp" value="">
+					  	<input id="text" name="descrp" value="<?php if(isset($_GET['descrp'])) echo $_GET['descrp'];?>">
 					  	<br>Room Number:<br>
-					  	<input id="text" name="room" value="">
+					  	<input id="text" name="room" value="<?php if(isset($_GET['room'])) echo $_GET['room'];?>">
 					  	<br>*Finder First Name:<br>
-					  	<input id="text" name="finder_fname" value="">
+					  	<input id="text" name="finder_fname" value="<?php if(isset($_GET['finder_fname'])) echo $_GET['finder_fname'];?>">
 					  	<br>*Finder Last Name:<br>
-					  	<input id="text" name="finder_lname" value="">
+					  	<input id="text" name="finder_lname" value="<?php if(isset($_GET['finder_lname'])) echo $_GET['finder_lname'];?>">
 					  	<br><br>
 					  	<input type="hidden" name="status" value="found">
 					  	<input id="button" type="submit" value="Submit">
