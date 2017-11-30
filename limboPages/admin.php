@@ -11,12 +11,19 @@ require('../scripts/connect_db.php');
 require('../scripts/limboFunctions.php');
 require('../scripts/showLinkRecords.php');
 
-# Update the status of an item if it is changed
+# Perform changes to database if made in table
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$id = $_POST['id'];
-	$status = $_POST['status'];
-	update_status($dbc, $id, $status);
-}	   			
+		# Update the status of an item if it is changed
+		if(isset($_POST['deleteID'])) {
+			$id = $_POST['deleteID'];
+			delete_item($dbc, $id);
+		# Delete an item from the database
+		} else if(isset($_POST['updateID'])) {
+			$id = $_POST['updateID'];
+			$status = $_POST['status'];
+			update_status($dbc, $id, $status);
+		}
+	}   			
 ?>
 	<head>
 		<meta charset = "utf-8">
@@ -54,6 +61,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 					<!-- create table -->
 		   			<table class="qltable">
 		   				<tr>
+		   					<th></th>
 		   					<th>ID</th>
 		   					<th>Name</th>
 		   					<th>Status</th>

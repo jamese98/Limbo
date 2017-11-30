@@ -42,6 +42,13 @@ function update_status($dbc, $id, $status) {
   mysqli_query($dbc, $query);
 }
 
+# Deletes an item from the database; used by the admin page
+function delete_item($dbc, $id) {
+  # Create and execute query to delete item with specified id
+  $query = "DELETE FROM stuff WHERE id = $id";
+  mysqli_query($dbc, $query);
+}
+
 
 function validateName($input){
 	global $dbc;

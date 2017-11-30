@@ -36,10 +36,13 @@ function show_link_records($dbc, $table) {
   				# Table for admin page
  				$alink = '<A HREF=viewitem.php?id=' . $row['id']  . '>' . $row['id'] . '</A>';
 	    		echo '<TR>';
+	    		echo "<form action='admin.php' method='POST' name='delete".$row['id']."'>";
+	    		echo '<td><input type=\'image\' src=\'../limboPages/delete.png\' class=\'delico\' name=\'deleteID\' value=' . $row['id'] . '></td>';
+	    		echo "</form>";
 	    		# Start the form for the dropdown menu - each menu is its own form
-				echo "<form action='admin.php' method='POST' name='form'".$row['id'].">";
+				echo "<form action='admin.php' method='POST' name='form".$row['id']."'>";
 				# Hidden input to pass the item ID over POST for updating
-	    		echo '<td><input type=\'hidden\' name=\'id\' value=' . $row['id'] . '>' . $alink . '</td>';
+	    		echo '<td><input type=\'hidden\' name=\'updateID\' value=' . $row['id'] . '>' . $alink . '</td>';
 	    		echo '<TD>' . $row['name'];
 	    		if($row['status'] == "lost") {
 	    			# Generate dropdown options for items with lost status
