@@ -17,30 +17,21 @@ function check_results($results) {
   return true ;
 }
 
-function search_record($dbc, $item,$status, $firstname, $lastname, $location, $date,$email, $phonenumber, $deatails) {
-  $query = 'INSERT INTO users VALUES' ;
-
-  $results = mysqli_query($dbc,$query) ;
-  check_results($results) ;
-
-  return $results ;
-}
-
-function insert_record($dbc, $item,$status, $firstname, $lastname, $location, $date,$email, $phonenumber, $deatails) {
-  $query = 'INSERT INTO users VALUES' ;
-
-  $results = mysqli_query($dbc,$query) ;
-  check_results($results) ;
-
-  return $results ;
-}
-
 # Updates the status of an item in the database; used by the admin page
 function update_status($dbc, $id, $status) {
   # Create and execute query to update status of item with specified id
   $query = "UPDATE stuff SET status = '" . $status . "' WHERE id = $id";
   mysqli_query($dbc, $query);
 }
+
+# Updates the status of an item in the database; used by the admin page
+function check_status($dbc, $id) {
+  # Create and execute query to update status of item with specified id
+  $query = "SELECT status from stuff WHERE id = $id";
+  $status = mysqli_query($dbc, $query);
+  return $status;
+}
+
 
 # Deletes an item from the database; used by the admin page
 function delete_item($dbc, $id) {

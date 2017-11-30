@@ -5,14 +5,15 @@ Version 0.1 -->
 
 <!DOCTYPE HTML>
 <?php
-// ini_set('display_errors', TRUE);
-// error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+error_reporting(E_ALL);
 
 require('../scripts/inputRecord.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'GET') {
-	console_log("Form submitted");
 	$status = $_GET['status'];
+	record_ctrl($status);
+}
 ?>
 <html>
 	<head>
@@ -48,6 +49,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
 		   		<div id="entryform">
 		   			<h1> Finder Page </h1>
 					<p>Submit records of found items within the marist campus.</p>
+					<p>* = Required Field</p>
 					<form action="reportfound.php">
 						<br>Location:<br>
 					  	<select id="text" name="location" >
@@ -90,15 +92,15 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
 				     		<option value="35">Upper Fulton Townhouses</option>
 				     		<option value="36">Upper West Townhouses </option>
   						</select>
-					  	<br>Item Name:<br>
+					  	<br>*Item Name:<br>
 					  	<input id="text" name="name" value="">
 						<br>Description:<br>
 					  	<input id="text" name="descrp" value="">
 					  	<br>Room Number:<br>
 					  	<input id="text" name="room" value="">
-					  	<br>Finder First Name:<br>
+					  	<br>*Finder First Name:<br>
 					  	<input id="text" name="finder_fname" value="">
-					  	<br>Finder Last Name:<br>
+					  	<br>*Finder Last Name:<br>
 					  	<input id="text" name="finder_lname" value="">
 					  	<br><br>
 					  	<input type="hidden" name="status" value="found">

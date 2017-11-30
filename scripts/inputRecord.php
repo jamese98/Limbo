@@ -8,7 +8,6 @@ require('connect_db.php');
 require('limboFunctions.php');
 
 function record_ctrl($status){
-
 	global $dbc;
 	if ($status == "lost"){
 			insert_lost_record($dbc, $status);
@@ -26,11 +25,21 @@ function insert_lost_record($dbc, $status){
 	$owner_fname = $_GET['owner_fname'];
 	$owner_lname = $_GET['owner_lname'];
 
-	$sql = "INSERT INTO stuff (location_id, name, description, create_date, room, owner_fname, owner_lname, status) VALUES('" . $loc . "','". $itemName. "','" . $descrp . "', '" . $date . "', '" . $room ."', '" . $owner_fname ."', '" . $owner_lname . "','" . $status . "')";
-		
-	$result = mysqli_query( $dbc , $sql );
-	check_results($result);
-	alert($result);
+	if (empty($itemName)){ 
+		echo '<div id="content_area"><h2>Please Enter an item name.</h2></div>';
+	
+	}else if (empty($owner_fname)) {
+		echo '<div id="content_area"><h2>Please Enter a owner First Name.</h2></div>';
+	}else if (empty($owner_lname)) {
+		echo '<div id="content_area"><h2>Please Enter a owner Last Name.</h2></div>';
+	}else{
+		$sql = "INSERT INTO stuff (location_id, name, description, create_date, room, owner_fname, owner_lname, status) VALUES('" . $loc . "','". $itemName. "','" . $descrp . "', '" . $date . "', '" . $room ."', '" . $owner_fname ."', '" . $owner_lname . "','" . $status . "')";
+			
+		$result = mysqli_query( $dbc , $sql );
+		check_results($result);
+		alert($result);
+	}
+	
 }
 
 function insert_found_record($dbc, $status){
@@ -42,18 +51,27 @@ function insert_found_record($dbc, $status){
 	$finder_fname = $_GET['finder_fname'];
 	$finder_lname = $_GET['finder_lname'];
 
-	$sql = "INSERT INTO stuff (location_id, name, description, create_date, room, finder_fname, finder_lname, status) VALUES('" . $loc . "','". $itemName. "','" . $descrp . "', '" . $date . "', '" . $room ."', '" . $finder_fname ."', '" . $finder_lname . "','" . $status . "')";
-		
-	$result = mysqli_query( $dbc , $sql );
-	check_results($result);
-	alert($result);
+	if (empty($itemName)){ 
+		echo '<div id="content_area"><h2>Please Enter an item name.</h2></div>';
+	
+	}else if (empty($finder_fname)) {
+		echo '<div id="content_area"><h2>Please Enter a finder First Name.</h2></div>';
+	}else if (empty($finder_lname)) {
+		echo '<div id="content_area"><h2>Please Enter a finder Last Name.</h2></div>';
+	}else{
+		$sql = "INSERT INTO stuff (location_id, name, description, create_date, room, finder_fname, finder_lname, status) VALUES('" . $loc . "','". $itemName. "','" . $descrp . "', '" . $date . "', '" . $room ."', '" . $finder_fname ."', '" . $finder_lname . "','" . $status . "')";
+			
+		$result = mysqli_query( $dbc , $sql );
+		check_results($result);
+		alert($result);
+	}
 }
 
 function alert($result){
 	if (!$result){
-			echo '<h4 id="err">Please submit a valid record!</h4>';
+			echo '<div id="content_area"><h2>Please submit a valid record!</h2></div>';
 		}else{
-			echo '<h4 id="err">Record Saved in Database</h4>';
+			echo '<div id="content_area"><h2>Record Saved in Database</h2></div>';
 	}
 }
 

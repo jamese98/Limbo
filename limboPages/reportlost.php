@@ -50,6 +50,7 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
 		   		<div id="entryform">
 		   			<h1> Lost Page </h1>
 					<p>Submit records of lost items within the marist campus.</p>
+					<p>* = Required Field</p>
 					<form action="reportlost.php">
 						<br>Location:<br>
 					  	  	<select id="text" name="location" >
@@ -92,15 +93,15 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
 				     		<option value="35">Upper Fulton Townhouses</option>
 				     		<option value="36">Upper West Townhouses </option>
   						</select>
-					  	<br>Item Name:<br>
+					  	<br>*Item Name:<br>
 					  	<input id="text" name="name" value="">
 						<br>Description:<br>
 					  	<input id="text" name="descrp" value="">
 					  	<br>Room Number:<br>
 					  	<input id="text" name="room" value="">
-					  	<br>Owner First Name:<br>
+					  	<br>*Owner First Name:<br>
 					  	<input id="text" name="finder_fname" value="">
-					  	<br>Owner Last Name:<br>
+					  	<br>*Owner Last Name:<br>
 					  	<input id="text" name="finder_lname" value="">
 					  	<br><br>
 					  	<input type="hidden" name="status" value="lost">

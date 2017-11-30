@@ -6,8 +6,8 @@ Version 0.1 -->
 <html>
 <?php
 #outputs errors for debugging
-ini_set('display_errors', TRUE);
-error_reporting(E_ALL);
+// ini_set('display_errors', TRUE);
+// error_reporting(E_ALL);
 
 require('../scripts/redirect.php');
 require('../scripts/limboFunctions.php');
@@ -21,13 +21,13 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 	
 	#Ensures no empty fields
 	if (empty($userName) OR empty($pw)){
-		echo '<p style="color:red">Please complete the form Fully.</p>';
+		echo '<div id="content_area"><h2>Please complete the form Fully.</h2></div>';
 	#Ensure the username is correct
 	}else if (!$uVal) {
-		echo '<p style="color:red">User Name Invalid for Account</p>';
+		echo '<div id="content_area"><h2>User Name Invalid for Account</h2></div>';
 	#Ensure the Password is correct
 	}else if (!$pVal){
-		echo '<p style="color:red">Password Invalid for Account</p>';
+		echo '<div id="content_area"><h2>Password Invalid for Account</h2></div>';
 	#Else allow for login and redirect
 	}else{
 		redirect('admin.php');

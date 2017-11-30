@@ -17,23 +17,28 @@ function show_record($dbc, $id) {
 		  		echo '<p>Name: ' . $row['name'] . '</p>';
 		  		echo '<p>Status: ' . ucwords($row['status']) . '</p>';
 		  		echo '<p>Location Found: ' . buildingToName($row['location_id']) . '</p>';
-		  		echo '<p>Date/Time Found: ' . $row['create_date'];
-		  		echo '<p>Description: ' . $row['description'];
-		  		echo '<p>Finder Name: ' . $row['finder'] . '</p>';				
+		  		echo '<p>Date/Time Found: ' . $row['create_date'] . '</p>';
+		  		echo '<p>Description: ' . $row['description'] . '</p>';
+		  		echo '<p>Finder Name: ' . $row['finder_fname'] . '</p>';
+		  		echo '<p>Finder Name: ' . $row['finder_lname'] . '</p>';				
 			} else if($row['status'] == 'lost')	{
 		  		echo '<p>Name: ' . $row['name'] . '</p>';
 		  		echo '<p>Status: ' . ucwords($row['status']) . '</p>';
 		  		echo '<p>Location Lost: ' . buildingToName($row['location_id']) . '</p>';
 		  		echo '<p>Date/Time Lost: ' . $row['create_date'];
 		  		echo '<p>Description: ' . $row['description'];
-		  		echo '<p>Owner Name: ' . $row['owner'] . '</p>';	
+		  		echo '<p>Owner First Name: ' . $row['owner_fname'] . '</p>';	
+		  		echo '<p>Owner Last Name: ' . $row['owner_lname'] . '</p>';
 			} else if($row['status'] == 'claimed') {
 		  		echo '<p>Name: ' . $row['name'] . '</p>';
 		  		echo '<p>Status: ' . ucwords($row['status']) . '</p>';
 		  		echo '<p>Location Found: ' . buildingToName($row['location_id']) . '</p>';
 		  		echo '<p>Date/Time Found: ' . $row['create_date'];
 		  		echo '<p>Description: ' . $row['description'];
-		  		echo '<p>Finder Name: ' . $row['finder'] . '</p>';	
+		  		echo '<p>Owner First Name: ' . $row['owner_fname'] . '</p>';	
+		  		echo '<p>Owner Last Name: ' . $row['owner_lname'] . '</p>';
+		  		echo '<p>Finder Name: ' . $row['finder_fname'] . '</p>';
+		  		echo '<p>Finder Name: ' . $row['finder_lname'] . '</p>';
 			}
 		}
 

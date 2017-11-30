@@ -13,15 +13,17 @@ require('../scripts/showLinkRecords.php');
 
 # Perform changes to database if made in table
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-		# Update the status of an item if it is changed
+		# Delete an item from the database
 		if(isset($_POST['deleteID'])) {
 			$id = $_POST['deleteID'];
 			delete_item($dbc, $id);
-		# Delete an item from the database
+			echo '<div id="content_area"><h2>Item Deleted</h2></div>';
+		# Update the status of an item if it is changed
 		} else if(isset($_POST['updateID'])) {
 			$id = $_POST['updateID'];
 			$status = $_POST['status'];
 			update_status($dbc, $id, $status);
+			echo '<div id="content_area"><h2>Item Updated</h2></div>';
 		}
 	}   			
 ?>
