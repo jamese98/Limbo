@@ -6,6 +6,7 @@ Version 0.1 -->
 <?php
 require('connect_db.php');
 require('limboFunctions.php');
+require('../scripts/redirect.php');
 
 function record_ctrl($status){
 	global $dbc;
@@ -37,6 +38,7 @@ function insert_lost_record($dbc, $status){
 			
 		$result = mysqli_query( $dbc , $sql );
 		check_results($result);
+		redirect('lostitems.php');
 		alert($result);
 	}
 	
@@ -63,6 +65,7 @@ function insert_found_record($dbc, $status){
 			
 		$result = mysqli_query( $dbc , $sql );
 		check_results($result);
+		redirect('founditems.php');
 		alert($result);
 	}
 }
