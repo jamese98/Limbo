@@ -16,12 +16,12 @@ function record_ctrl($status){
 }
 
 function insert_lost_record($dbc, $status){
-	$loc = $_POST['location'];
-	$descrp = $_POST['description'];
-	$room = $_POST['room'];
-	$owner = $_POST['owner'];
+	$loc = $GET['location'];
+	$descrp = $_GET['descrp'];
+	$room = $_GET['room'];
+	$owner = $_GET['owner'];
 
-	$sql = "INSERT INTO stuff (location_id, description, create_date, room, owner, finder, status) VALUES('" . $loc . "', '" .$descrp . "', 'NOW();', '" . $room ."', '". $owner. "', '" . $finder ."', '" . $status. "')";
+	$sql = "INSERT INTO stuff (location_id, description, create_date, room, owner, finder, status) VALUES('" . $loc . "', '" . $descrp . "', 'NOW();', '" . $room ."', '". $owner. "', '" . $finder ."', '" . $status. "')";
 		
 	$result = mysqli_query( $dbc , $sql );
 	check_results($result);
@@ -29,13 +29,13 @@ function insert_lost_record($dbc, $status){
 }
 
 function insert_found_record($dbc, $status){
-	$loc = $_POST['location'];
-	$descrp = $_POST['description'];
-	$date = $_POST['date'];
-	$room = $_POST['room'];
-	$finder = $_POST['finder'];
+	$loc = $_GET['location'];
+	$descrp = $_GET'descrp'];
+	$date = $_GET['date'];
+	$room = $_GET['room'];
+	$finder = $_GET['finder'];
 
-	$sql = "INSERT INTO stuff (location_id, description, create_date, room, owner, finder, status) VALUES('" . $loc . "', '" .$descrp . "', '" . $date ."', '" . $room ."', '". $owner. "', '" . $finder ."', '" . $status. "')";
+	$sql = "INSERT INTO stuff (location_id, description, create_date, room, owner, finder, status) VALUES('" . $loc . "', '" . $descrp . "', '" . $date ."', '" . $room ."', '". $owner. "', '" . $finder ."', '" . $status. "')";
 		
 	$result = mysqli_query( $dbc , $sql );
 	check_results($result);

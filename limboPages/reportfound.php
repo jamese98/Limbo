@@ -5,13 +5,14 @@ Version 0.1 -->
 
 <!DOCTYPE HTML>
 <?php
+ini_set('display_errors', TRUE);
+error_reporting(E_ALL);
+
 require('../scripts/inputRecord.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'GET') {
 	console_log("Form submitted");
 	$status = $_GET['status'];
-	record_ctrl($status);
-}
 ?>
 <html>
 	<head>
