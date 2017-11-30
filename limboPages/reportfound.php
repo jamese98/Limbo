@@ -51,18 +51,18 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
 		   			<h1> Finder Page </h1>
 					<p>Submit records of found items within the marist campus.</p>
 					<form action="reportfound.php">
-						<br>Loacation:<br>
+						<br>Location:<br>
 					  	<input id="text" name="location" value="">
-					  	<br>Name:<br>
+					  	<br>Item Name:<br>
 					  	<input id="text" name="name" value="">
 						<br>Description:<br>
 					  	<input id="text" name="descrp" value="">
 					  	<br>Room Number:<br>
 					  	<input id="text" name="room" value="">
-					  	<br>Finder:<br>
-					  	<input id="text" name="finder" value="">
-					  	<br>Status:<br>
-					  	<input id="text" name="status" value="">
+					  	<br>Finder First Name:<br>
+					  	<input id="text" name="finder_fname" value="">
+					  	<br>Finder Last Name:<br>
+					  	<input id="text" name="finder_lname" value="">
 					  	<br><br>
 					  	<input type="hidden" name="status" value="found">
 					  	<input id="button" type="submit" value="Submit">
