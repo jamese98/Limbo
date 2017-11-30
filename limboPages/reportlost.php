@@ -1,4 +1,4 @@
-<!-- reprotlost.php
+<!-- reportlost.php
 Create a site for Limbo using CSS
 Authors: James Ekstract, Daniel Gisolfi
 Version 0.1 -->
@@ -36,11 +36,11 @@ if($_SERVER['REQUEST_METHOD'] == 'GET') {
 						 	<li><a href="lostitems.php">Lost Items</a></li>
 						 	<li class="dropdown active-page"><a href="#" class="dropbtn">Report an Item</a>
 						  	<div class="dropdown-content">
-						  		<a href="reportlost.php">Lost</a>
-						  		<a href="reportfound.php" class="active-page">Found</a>
+						  		<a href="reportlost.php" class="active-page">Lost</a>
+						  		<a href="reportfound.php">Found</a>
 						  	</div>
 						  	</li>
-						  	<li class="adminlink"><a href="AdminLogin.php">Admin</a></li>
+						  	<li class="adminlink"><a href="adminLogin.php">Admin</a></li>
 						</ul>
 					</div>
 				</div>

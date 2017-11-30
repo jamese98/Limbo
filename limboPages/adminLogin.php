@@ -1,4 +1,4 @@
-<!-- AdminLogin.html
+<!-- adminLogin.php
 Create a site for Limbo using CSS
 Authors: James Ekstract, Daniel Gisolfi
 Version 0.1 -->
@@ -57,7 +57,7 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 						  		<a href="reportfound.php">Found</a>
 						  	</div>
 						  	</li>
-						  	<li class="adminlink"><a href="adminLogin.php">Admin</a></li>
+						  	<li class="adminlink active-page"><a href="adminLogin.php">Admin</a></li>
 						</ul>
 					</div>
 				</div>
