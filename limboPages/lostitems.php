@@ -44,7 +44,7 @@ require('../scripts/showLinkRecords.php');
 	  		<!-- content area -->
 	  		<div id="content_area">
 		   		<div id="items">
-		   			<h1>Found Items</h1>
+		   			<h1>Lost Items</h1>
 		   			<!-- create the table -->
 		   			<table class="qltable">
 		   				<tr>
