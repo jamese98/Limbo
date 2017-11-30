@@ -48,7 +48,6 @@ require('../scripts/showLinkRecords.php');
 		   					<th>Name</th>
 		   					<th>Status</th>
 		   					<th>Date Reported</th>
-		   					<th>Time Reported</th>
 		   					<th>Location</th>
 		   				</tr>
 		   			<?php
