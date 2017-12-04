@@ -8,10 +8,12 @@ ini_set('display_errors', TRUE);
 error_reporting(E_ALL);
 require('connect_db.php');
 
-
+// check if a query produces an error
 function check_results($results) {
+  // declare dbc globally for all functions to use
   global $dbc;
 
+  // Check if the results are flase and if so output the error
   if($results != true){
     echo '<p>SQL ERROR = ' . mysqli_error( $dbc ) . '</p>'  ;
   }
@@ -25,25 +27,33 @@ function update_status($dbc, $id, $status) {
   mysqli_query($dbc, $query);
 }
 
-# Updates the status of an item in the database; used by the admin page
+#Changes the value of a records status to claimed
 function claim_item($dbc, $id, $fname, $lname, $statID) {
+  # if the record is claimed and found insert the finders information
   if ($statID == 0){
    $query = "UPDATE stuff SET finder_fname = '" . $fname . "', finder_lname ='" . $lname . "' WHERE id ='" . $id . "'";
+   # if the record is claimed and lost insert the owners information
   }else if ($statID == 1){
    $query = "UPDATE stuff SET owner_fname = '" . $fname . "', owner_lname ='" . $lname . "' WHERE id ='" . $id . "'";
   }
+  #run the query and set the output to the result var
   $result = mysqli_query( $dbc , $query );
+  #check wether the query ran into any errors
   check_results($result);
+  #if everything worked alert the user that the item gas been updated
   echo "Item Updated";
 
 }          
 
-# Updates the status of an item in the database; used by the admin page
+# Checks the status of a record using the id
 function check_status($dbc, $id) {
-  # Create and execute query to update status of item with specified id
+  # return the results of the status for an id
   $query = "SELECT status from stuff WHERE id = '". $id . "'";
+  #run the query and set the output to the result var
   $result = mysqli_query($dbc, $query);
+   #check wether the query ran into any errors
   check_results($result);
+  #return the result of the query
   return $result;
 }
 
@@ -55,16 +65,17 @@ function delete_item($dbc, $id) {
   mysqli_query($dbc, $query);
 }
 
-
+#CHecks wether the user name for admin login is valid
 function validateName($input){
-	global $dbc;
 
+  #queries the DB where the username exists
 	$query = "SELECT first_name FROM users WHERE first_name='" . $input . "'";
 
 	# Execute the query
   	$results = mysqli_query($dbc, $query);
   	check_results($results);
 
+    #checks wether at least one record is found and if not returns false
   	if (mysqli_num_rows( $results ) == 0 ){
     	return false;
   	} else {
@@ -87,6 +98,7 @@ function validatePass($input){
   	$results = mysqli_query( $dbc, $query ) ;
  	check_results($results);
 
+  #checks wether at least one record is found and if not returns false
  	if (mysqli_num_rows( $results ) == 0 ){
     	return false ;
   	}else{
@@ -96,15 +108,16 @@ function validatePass($input){
 
 function buildingToName($id){
   global $dbc;
-
+  // gets the name of the location with coresponding id
   $query = "SELECT name FROM locations WHERE id = " .$id. "";
 
+  #checks results
   $results = mysqli_query($dbc, $query);
   check_results($results);
   $row = mysqli_fetch_array($results, MYSQLI_ASSOC);
   return $row['name'];
 }
-
+// A function used for debugging
 function console_log( $data ){
   echo '<script>';
   echo 'console.log('. json_encode( $data ) .')';

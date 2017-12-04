@@ -13,9 +13,13 @@ require('../scripts/showAdmin.php');
 require('../scripts/limboFunctions.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
+	#gets the uopdateID from the form
 	$id = $_POST['updateID'];
+	#gets the username value from the form
 	$username = $_POST['username'];
+	#gets the password value from the form
 	$password = $_POST['password1'];
+	// runs the update admin to update the record
 	update_admin($dbc, $id, $username, $password);
 }
 ?>
