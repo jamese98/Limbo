@@ -49,11 +49,13 @@ function claim_item($dbc, $id, $fname, $lname, $CB_NUM, $statID) {
 
 }          
 
+
 # Checks the status of a record using the id
 function check_status($dbc, $id) {
   # return the results of the status for an id
-  $query = "SELECT status from stuff WHERE id = '". $id . "'";
+  $query = 'SELECT status FROM stuff WHERE id = ' . $id;
   #run the query and set the output to the result var
+  console_log($query);
   $result = mysqli_query($dbc, $query);
    #check wether the query ran into any errors
   check_results($result);
@@ -91,6 +93,11 @@ function validateName($input){
 
 function validatePass($input){
 	global $dbc;
+
+
+	#Retrieve password from DB and compare input to the actual value
+	$query = "SELECT pass FROM users WHERE first_name='" . $userName . "'" ;
+
 
 	#Take the pw passed to the function and hash it 
 	$pw = hash('ripemd160',$input);
@@ -136,6 +143,5 @@ function update_admin($dbc, $id, $username, $password) {
   console_log($query);
   mysqli_query($dbc, $query);
 }
-
 
 ?>
