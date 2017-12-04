@@ -1,4 +1,4 @@
-<!-- admin.php
+<!-- manageAdmins.php
 Create a site for Limbo using CSS
 Authors: James Ekstract, Daniel Gisolfi
 Version 0.1 -->
@@ -8,24 +8,16 @@ Version 0.1 -->
 <?php
 # Required PHP files to include
 require('../scripts/connect_db.php');
-require('../scripts/limboFunctions.php');
-require('../scripts/showLinkRecords.php');
+require('../scripts/showAdminRecords.php');
+require('../scripts/inputRecord.php');
 
 # Perform changes to database if made in table
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-		# Delete an item from the database
-		if(isset($_POST['deleteID'])) {
-			$id = $_POST['deleteID'];
-			delete_item($dbc, $id);
-			echo '<div id="content_area"><h2>Item Deleted</h2></div>';
-		# Update the status of an item if it is changed
-		} else if(isset($_POST['updateID'])) {
-			$id = $_POST['updateID'];
-			$status = $_POST['status'];
-			update_status($dbc, $id, $status);
-			echo '<div id="content_area"><h2>Item Updated</h2></div>';
-		}
-	}   			
+	$username = $_POST['username'];
+	$password1 = $_POST['password1'];
+	$password2 = $_POST['password2'];
+	insert_admin_record($dbc);
+}  			
 ?>
 	<head>
 		<meta charset = "utf-8">
@@ -58,23 +50,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	  		<!-- content area -->
 	  		<div id="content_area">
 		   		<div id="items">
-		   			<a href="manageAdmins.php" id="mgadmin">Manage Admins</a>
-		   			<h1>Admin Page</h1>
-					<p> Edit and remove records within the Limbo database</p>
+		   			<a href="admin.php" id="mgadmin">Manage Items</a>
+		   			<br/>
+		   			<a href="addAdmin.php" id="mgadmin">Add Admin</a>
+		   			<h1>Manage Admins</h1>
+					<p>Manage administrator accounts which can manage the Limbo database</p>
 					<!-- create table -->
 		   			<table class="qltable">
 		   				<tr>
 		   					<th></th>
 		   					<th>ID</th>
-		   					<th>Name</th>
-		   					<th>Status</th>
-		   					<th>Date Reported</th>
-		   					<th>Date Updated</th>
-		   					<th>Location</th>
+		   					<th>Userame</th>
+		   					<th>Date Created</th>
 		   				</tr>
 		   			<?php
 		   			# Populate table with all items from database
-		   			show_link_records($dbc, "admin");
+		   			show_admin_records($dbc);
 
 		   			# Close database connection
 		   			mysqli_close($dbc);

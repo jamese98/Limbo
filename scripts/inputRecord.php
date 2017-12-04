@@ -70,6 +70,27 @@ function insert_found_record($dbc, $status){
 	}
 }
 
+# Inserts new admin record into the database
+function insert_admin_record($dbc) {
+	$username = $_POST['username'];
+	$password1 = $_POST['password1'];
+	$password2 = $_POST['password2'];
+
+	if(empty($username)) {
+		echo '<div id="content_area"><h2>Please enter a username</h2></div>';
+	} else if(empty($password1)) {
+		echo '<div id="content_area"><h2>Please Enter an password</h2></div>';
+	} else if(empty($password2)) {
+		echo '<div id="content_area"><h2>Please confirm password</h2></div>';
+	} else if($password1 != $password2) {
+		echo '<div id="content_area"><h2>Passwords do not match. Please try again.</h2></div>';
+	} else {
+		$query = "INSERT INTO users(first_name, pass, reg_date) VALUES('" . $username . "','" . $password1 . "', NOW())";
+		$result = mysqli_query($dbc, $query);
+		check_results($result);
+	}
+}
+
 function alert($result){
 	if (!$result){
 			echo '<div id="content_area"><h2>Please submit a valid record!</h2></div>';

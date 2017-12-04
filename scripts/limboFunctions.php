@@ -96,5 +96,14 @@ function console_log( $data ){
   echo '</script>';
 }
 
+# Updates admin information
+function update_admin($dbc, $id, $username, $password) {
+  # Create and execute query to update status of item with specified id
+  //$query = 'SELECT * FROM stuff WHERE id = ' . $id;
+  $query = 'UPDATE users SET first_name = ' . $username . ', pass = ' . $password . ' WHERE id = ' . $id;
+  console_log($query);
+  mysqli_query($dbc, $query);
+}
+
 
 ?>
