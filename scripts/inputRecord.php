@@ -115,7 +115,6 @@ function insert_admin_record($dbc) {
 		echo '<div id="content_area"><h2>Passwords do not match. Please try again.</h2></div>';
 	// If everything checks out a new admin is inserted in the users table
 	} else {
-		$password1 = password_hash($password1, PASSWORD_DEFAULT);
 		$query = "INSERT INTO users(first_name, pass, reg_date) VALUES('" . $username . "','" . $password1 . "', NOW())";
 		//runs the query and places the results in a var 
 		$result = mysqli_query($dbc, $query);

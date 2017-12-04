@@ -49,17 +49,6 @@ function claim_item($dbc, $id, $fname, $lname, $CB_NUM, $statID) {
 
 }          
 
-
-# Returns status of item with specified id
-function check_status($dbc, $id) {
-  # Create and execute query to update status of item with specified id
-  $query = 'SELECT status FROM stuff WHERE id = ' . $id;
-  console_log($query);
-  $result = mysqli_query($dbc, $query);
-  console_log($result);
-  check_results($result);
-
-
 # Checks the status of a record using the id
 function check_status($dbc, $id) {
   # return the results of the status for an id
@@ -99,31 +88,19 @@ function validateName($input){
 
 }
 
-# Hashes password and validates it against password in database
-function validatePass($userName, $pw){
+
+function validatePass($input){
 	global $dbc;
 
-
-	#Retrieve password from DB and compare input to the actual value
-	$query = "SELECT pass FROM users WHERE first_name='" . $userName . "'" ;
-=======
 	#Take the pw passed to the function and hash it 
 	$pw = hash('ripemd160',$input);
 
 	#Retrieve password from DB and compare input to the actual value
 	$query = "SELECT pass FROM users WHERE pass='" . $pw . "'" ;
 
-
 	# Execute the query
-  $results = mysqli_query($dbc, $query);
+  	$results = mysqli_query( $dbc, $query ) ;
  	check_results($results);
-
-  $row = mysqli_fetch_array($results, MYSQLI_ASSOC);
-  if(password_verify($pw, $row['pass'])) {
-    return true;
-  } else {
-    return false;
-  }
 
   #checks wether at least one record is found and if not returns false
  	if (mysqli_num_rows( $results ) == 0 ){
@@ -131,7 +108,6 @@ function validatePass($userName, $pw){
   	}else{
   		return true;
   	}
-
 }
 
 function buildingToName($id){
@@ -154,18 +130,11 @@ function console_log( $data ){
 
 # Updates admin information
 function update_admin($dbc, $id, $username, $password) {
-  # Create and execute query to update information of admin with specified id
-  $password = password_hash($password, PASSWORD_DEFAULT);
-  $query = 'UPDATE users SET first_name = "' . $username . '", pass = "' . $password . '" WHERE user_id = ' . $id;
+  # Create and execute query to update status of item with specified id
+  //$query = 'SELECT * FROM stuff WHERE id = ' . $id;
+  $query = 'UPDATE users SET first_name = ' . $username . ', pass = ' . $password . ' WHERE id = ' . $id;
+  console_log($query);
   mysqli_query($dbc, $query);
-}
-
-# Deletes an admin from the database
-function delete_admin($dbc, $id) {
-  # Create and execute query to delete item with specified id
-  $query = "DELETE FROM users WHERE user_id = $id";
-  mysqli_query($dbc, $query);
-
 }
 
 

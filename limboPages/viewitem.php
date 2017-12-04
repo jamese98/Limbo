@@ -67,11 +67,7 @@ require('../scripts/redirect.php');
 
 						// If the claim button is pressed
 						if(isset($_POST['claim'])){
-
-							console_log($_POST);
-
 							// get all values from the form
-
 							$fname = $_POST['fname'];
 							$lname = $_POST['lname'];
 							$id = $_POST['id'];

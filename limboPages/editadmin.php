@@ -58,11 +58,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 		   			<?php
 		   			# Display information for specified item
 		   			if($_SERVER['REQUEST_METHOD'] == 'GET') {
+		   				console_log($_GET);
 		   				if(isset($_GET['id'])) {
 		   					show_admin($dbc, $_GET['id']);
 		   				}
-		   			} else if($_SERVER['REQUEST_METHOD'] == 'POST') {
-		   				show_admin($dbc, $id);
 		   			}
 
 		   			#Close database connection

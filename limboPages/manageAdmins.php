@@ -13,16 +13,10 @@ require('../scripts/inputRecord.php');
 
 # Perform changes to database if made in table
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
-	if(isset($_POST['deleteID'])) {
-		$id = $_POST['deleteID'];
-		delete_admin($dbc, $id);
-		echo '<div id="content_area"><h2>Admin Deleted</h2></div>';
-	} else {
-		$username = $_POST['username'];
-		$password1 = $_POST['password1'];
-		$password2 = $_POST['password2'];
-		insert_admin_record($dbc);	
-	}
+	$username = $_POST['username'];
+	$password1 = $_POST['password1'];
+	$password2 = $_POST['password2'];
+	insert_admin_record($dbc);
 }  			
 ?>
 	<head>
