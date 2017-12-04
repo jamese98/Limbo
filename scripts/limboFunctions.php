@@ -26,13 +26,24 @@ function update_status($dbc, $id, $status) {
 }
 
 # Updates the status of an item in the database; used by the admin page
+function claim_item($dbc, $id, $fname, $lname, $statID) {
+  if ($statID == 0){
+   $query = "UPDATE stuff SET finder_fname = '" . $fname . "', finder_lname ='" . $lname . "' WHERE id ='" . $id . "'";
+  }else if ($statID == 1){
+   $query = "UPDATE stuff SET owner_fname = '" . $fname . "', owner_lname ='" . $lname . "' WHERE id ='" . $id . "'";
+  }
+  $result = mysqli_query( $dbc , $query );
+  check_results($result);
+  echo "Item Updated";
 
+}          
 
 # Updates the status of an item in the database; used by the admin page
 function check_status($dbc, $id) {
   # Create and execute query to update status of item with specified id
-  $query = 'SELECT status from stuff WHERE id = '. $id;
-  mysqli_query($dbc, $query);
+  $query = "SELECT status from stuff WHERE id = '". $id . "'";
+  $result = mysqli_query($dbc, $query);
+  check_results($result);
 }
 
 

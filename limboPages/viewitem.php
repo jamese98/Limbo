@@ -58,8 +58,7 @@ require('../scripts/redirect.php');
 							}
 						}
 						?>
-		   			
-		   			<div id="entryform">
+		   		
 		   				<h1> Claim Items </h1>
 						<p>Claim items found on the limbo site</p>
 						<p>* = Required Field</p>
@@ -70,34 +69,21 @@ require('../scripts/redirect.php');
 							$fname = $_POST['fname'];
 							$lname = $_POST['lname'];
 							$id = $_POST['id'];
-							$status = 'found';
-
-							// if ($status == 'lost'){
-							// 	claim_item($dbc, $id, $fname, $lname, 1);
-							// }else if($status == 'found'){
+							$status = check_status($dbc, $id);
+							if ($status == 'lost'){
 								claim_item($dbc, $id, $fname, $lname, 0);
-							// }
+								echo "lost";
+							}else if($status == 'found'){
+								claim_item($dbc, $id, $fname, $lname, 1);
+								echo "found";
+							}
 					
 							// update_status($dbc, $id, 'claimed');
 
-							 
-							// $page = 'viewitem.php?id='. $id;
-							// redirect($page);
-							echo $status;
+							
 								
 						}
 
-						function claim_item($dbc, $id, $fname, $lname, $namechange) {
-						  if ($namechange == 0){
-						   $query = "UPDATE stuff SET finder_fname ='" . $fname . "' AND finder_lname ='" . $lname . "' WHERE id ='" .$id . "'";
-						  }else if ($namechange == 1){
-						    $query = "UPDATE stuff SET owner_fname = '" . $fname . "' AND owner_lname ='" . $lname . "' WHERE id ='" .$id . "'";
-						    }
-						  $result = mysqli_query( $dbc , $query );
-						  check_results($result);
-
-						}
-							
 
 
 						#Close database connection
@@ -114,7 +100,7 @@ require('../scripts/redirect.php');
 							<input type="hidden" name="id" value="<?php echo $_GET['id'];?>">
 			   				<input id="button" name="claim" type="Submit" value="Claim">
 			   			</form> 
-	   				</div>
+	   			
 	  			</div>
 	  		</div>
 	  		<!-- footer -->
