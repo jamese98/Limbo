@@ -28,13 +28,17 @@ function update_status($dbc, $id, $status) {
 }
 
 #Changes the value of a records status to claimed
-function claim_item($dbc, $id, $fname, $lname, $statID) {
+function claim_item($dbc, $id, $fname, $lname, $CB_NUM, $statID) {
   # if the record is claimed and found insert the finders information
+  if(empty($CB_NUM)){
+    $CB_NUM = 'Null';
+  }
+
   if ($statID == 0){
-   $query = "UPDATE stuff SET finder_fname = '" . $fname . "', finder_lname ='" . $lname . "' WHERE id ='" . $id . "'";
+   $query = "UPDATE stuff SET finder_fname = '" . $fname . "', finder_lname ='" . $lname . "', claim_contact = '". $CB_NUM ."'WHERE id ='" . $id . "'";
    # if the record is claimed and lost insert the owners information
   }else if ($statID == 1){
-   $query = "UPDATE stuff SET owner_fname = '" . $fname . "', owner_lname ='" . $lname . "' WHERE id ='" . $id . "'";
+   $query = "UPDATE stuff SET owner_fname = '" . $fname . "', owner_lname ='" . $lname . "' , claim_contact = '". $CB_NUM . "'WHERE id ='" . $id . "'";
   }
   #run the query and set the output to the result var
   $result = mysqli_query( $dbc , $query );
@@ -89,10 +93,10 @@ function validatePass($input){
 	global $dbc;
 
 	#Take the pw passed to the function and hash it 
-	#$pw = hash($input);
+	$pw = hash('ripemd160',$input);
 
 	#Retrieve password from DB and compare input to the actual value
-	$query = "SELECT pass FROM users WHERE pass='" . $input . "'" ;
+	$query = "SELECT pass FROM users WHERE pass='" . $pw . "'" ;
 
 	# Execute the query
   	$results = mysqli_query( $dbc, $query ) ;
