@@ -17,7 +17,7 @@ if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
 	$pw = $_POST['pw'];
 	#Validate username and password
 	$uVal = validateName($userName);
-	$pVal = validatePass($pw);
+	$pVal = validatePass($userName, $pw);
 	
 	#Ensures no empty fields
 	if (empty($userName) OR empty($pw)){

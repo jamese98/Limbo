@@ -66,6 +66,7 @@ require('../scripts/redirect.php');
 
 
 						if(isset($_POST['claim'])){
+							console_log($_POST);
 							$fname = $_POST['fname'];
 							$lname = $_POST['lname'];
 							$id = $_POST['id'];

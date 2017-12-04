@@ -85,6 +85,7 @@ function insert_admin_record($dbc) {
 	} else if($password1 != $password2) {
 		echo '<div id="content_area"><h2>Passwords do not match. Please try again.</h2></div>';
 	} else {
+		$password1 = password_hash($password1, PASSWORD_DEFAULT);
 		$query = "INSERT INTO users(first_name, pass, reg_date) VALUES('" . $username . "','" . $password1 . "', NOW())";
 		$result = mysqli_query($dbc, $query);
 		check_results($result);

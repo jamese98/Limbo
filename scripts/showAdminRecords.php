@@ -18,7 +18,7 @@ function show_admin_records($dbc) {
   				$alink = '<A HREF=editadmin.php?id=' . $row['user_id']  . '>' . $row['user_id'] . '</A>';
   				echo '<TR>';
   				# Delete button
-	    		echo "<form action='manageAdmins.php' method='GET' name='adminDelete".$row['user_id']."'>";
+	    		echo "<form action='manageAdmins.php' method='POST' name='adminDelete".$row['user_id']."'>";
 	    		echo '<td><input type=\'image\' src=\'../limboPages/delete.png\' class=\'delico\' name=\'deleteID\' value=' . $row['user_id'] . '></td>';
 	    		echo "</form>";
 	    		echo '<td>' . $alink . '</td>';

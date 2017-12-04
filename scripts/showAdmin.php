@@ -22,10 +22,10 @@ function show_admin($dbc, $id) {
 		  		echo '<p>Change Password:</p>';
 		  		echo "<a>Password: </a>";
 		  		echo "<input type='hidden' name='updateID' value='" . $id . "'>";
-		  		echo "<input type='password' name='password1' value='" . $row['pass'] . "'>";
+		  		echo "<input type='password' name='password1'>";
 		  		echo "<br/>";
 		  		echo "<a>Confirm: </a>";
-		  		echo "<input type='password' name='password2' value='" . $row['pass'] . "'>";
+		  		echo "<input type='password' name='password2'>";
 		  		echo "<br/><br/>";
 		  		echo "<input id='button' type='Submit' value='Update'>";
 		  	echo "</form>";
