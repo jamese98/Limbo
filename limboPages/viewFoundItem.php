@@ -1,4 +1,4 @@
-<!-- claimitem.php
+<!-- claimFoundItem.php
 Create a site for Limbo using CSS
 Authors: James Ekstract, Daniel Gisolfi
 Version 0.1 -->
@@ -10,6 +10,7 @@ Version 0.1 -->
 require('../scripts/connect_db.php');
 # Include helper functions
 require('../scripts/limboFunctions.php');
+require('../scripts/showRecord.php');
 ?>
 	<head>
 		<meta charset = "utf-8">
@@ -41,38 +42,40 @@ require('../scripts/limboFunctions.php');
 	  		<!-- content area -->
 	  		<div id="content_area">
 		   		<div id="iteminfo">
-		   			<h1>Claim Item</h1>
+		   			<h1>Item Info</h1>
 		   			<?php
 		   			# Display information for specified item
 		   			if($_SERVER['REQUEST_METHOD'] == 'GET') {
 		   				if(isset($_GET['id'])) {
-		   					$id = $_GET['id'];
-			   				update_status($dbc, $id, "claimed");
-
+		   					show_record($dbc, $_GET['id']);
 		   				}
-		   				if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
-		   					if(isset($_POST['id'])) {
-								$id = $_POST['id'];
-						
-								$status = check_status($dbc, $_GET['id']);
-								if ($status == 'lost'){
-									claim_item($dbc, $id, $fname, $lname, 1);
-								}else if($status == 'found'){
-									claim_item($dbc, $id, $fname, $lname, 0);
-								}
-
-  								update_status($dbc, $id, 'claimed');
-								echo '<div id="content_area"><h2>Item Updated</h2></div>';
-							}
-						}
-
-					
 		   			}
+
+		   			if($_SERVER['REQUEST_METHOD'] == 'POST') {
+	   					if(isset($_POST['id'])) {
+							$id = $_POST['id'];
+							$status = $_POST['status'];
+							update_status($dbc, $id, 'claimed');
+							echo '<div id="content_area"><h2>Item Updated</h2></div>';
+						}else{
+							echo '<div id="content_area"><h2>Error</h2></div>';
+						}
+	   			 	} 
+
 		   			#Close database connection
 		   			mysqli_close($dbc);
 		   			?>
-				  	<br/><br/>
-					<form>
+		   		<div id="entryform">
+		   			<h1>Claim Items</h1>
+					<p>Claim Items by inputting your contact information</p>
+					<p>* = Required Field</p>
+					<form action="viewitem.php">
+						<br>*Owner First Name:<br>
+					  	<input id="text" name="owner_fname" value="<?php if(isset($_GET['owner_fname'])) echo $_GET['owner_fname'];?>">
+					  	<br>*Owner Last Name:<br>
+					  	<input id="text" name="owner_lname" value="<?php if(isset($_GET['owner_lname'])) echo $_GET['owner_lname'];?>">
+				  		<br/><br/>
+						<input type="hidden" name="id" value=<?php echo $_GET['id']; ?>>
 		   				<input id="button" method="POST" type="Submit" value="Claim">
 		   			</form>
 	  			</div>

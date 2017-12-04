@@ -1,4 +1,4 @@
-<!-- reportfound.php
+<!-- found.php
 Create a site for Limbo using CSS
 Authors: James Ekstract, Daniel Gisolfi
 Version 0.1 -->

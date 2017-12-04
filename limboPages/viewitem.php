@@ -6,11 +6,14 @@ Version 0.1 -->
 <!DOCTYPE HTML>
 <html>
 <?php
+ini_set('display_errors', TRUE);
+error_reporting(E_ALL);
 # Connect to MySQL server/database
 require('../scripts/connect_db.php');
 # Include helper functions
 require('../scripts/limboFunctions.php');
 require('../scripts/showRecord.php');
+require('../scripts/redirect.php');
 ?>
 	<head>
 		<meta charset = "utf-8">
@@ -48,33 +51,44 @@ require('../scripts/showRecord.php');
 		   			if($_SERVER['REQUEST_METHOD'] == 'GET') {
 		   				if(isset($_GET['id'])) {
 		   					show_record($dbc, $_GET['id']);
-	   						$status = check_status($dbc, $_GET['id']); 
-			   				// update_status($dbc, $_GET['id'], $status);
 		   				}
 		   			}
-		   	// 			if($_SERVER['REQUEST_METHOD'] == 'POST') 
-		   	// 				if(isset($_POST['id'])) {
-						// 		$id = $_POST['id'];
-						// 		$status = $_POST['status'];
-						// 		update_status($dbc, $id, $status);
-						// 		echo '<div id="content_area"><h2>Item Updated</h2></div>';
-						// 	}
-						// }
-		   			// } else if($_SERVER['REQUEST_METHOD'] == 'POST') {
-		   			// 	if(isset($_POST['id'])) {
 
-		   			// 	}
-		   			// }
+		   			if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
+		   				if(isset($_POST['id'])) {
+							$id = $_POST['id'];
+						
+							$status = check_status($dbc, $_GET['id']);
+							if ($status == 'lost'){
+								claim_item($dbc, $id, $fname, $lname, 1);
+							}else if($status == 'found'){
+								claim_item($dbc, $id, $fname, $lname, 0);
+							}
 
+							update_status($dbc, $id, 'claimed');
+							echo '<div id="content_area"><h2>Item Updated</h2></div>';
+							}
+						}
 
 		   			#Close database connection
 		   			mysqli_close($dbc);
 		   			?>
-				  	<br/><br/>
-					<form action="viewitem.php">
-						<input type="hidden" name="id" value=<?php echo $_GET['id']; ?>>
-		   				<input id="button" method="POST" type="Submit" value="Claim">
-		   			</form>
+		   			<div id="entryform">
+		   				<h1> Claim Items </h1>
+						<p>Claim items found on the limbo site</p>
+						<p>* = Required Field</p>
+		   				<form action="viewitem.php" method="POST">
+		   					<br>*First Name:<br>
+					  		<input id="text" name="fname" value="<?php if(isset($_GET['fname'])) echo $_GET['fname'];?>">
+					  		<br>*Last Name:<br>
+					  		<input id="text" name="lname" value="<?php if(isset($_GET['lname'])) echo $_GET['lname'];?>">
+					  		<br>Contact Number:<br>
+					  		<input id="text" name="CB_NUM" value="<?php if(isset($_GET['CB_NUM'])) echo $_GET['CB_NUM'];?>">
+					  		<br><br>
+							<input type="hidden" name="id" value=<?php echo $_GET['id']; ?>>
+			   				<input id="button" name="claim" type="Submit" value="Claim">
+			   			</form> 
+	   				</div>
 	  			</div>
 	  		</div>
 	  		<!-- footer -->
