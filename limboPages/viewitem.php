@@ -70,6 +70,7 @@ require('../scripts/redirect.php');
 							$lname = $_POST['lname'];
 							$id = $_POST['id'];
 							$status = check_status($dbc, $id);
+
 							if ($status == 'lost'){
 								claim_item($dbc, $id, $fname, $lname, 0);
 								echo "lost";

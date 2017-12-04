@@ -44,6 +44,7 @@ function check_status($dbc, $id) {
   $query = "SELECT status from stuff WHERE id = '". $id . "'";
   $result = mysqli_query($dbc, $query);
   check_results($result);
+  return $result;
 }
 
 
