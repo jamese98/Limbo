@@ -44,37 +44,40 @@ require('../scripts/limboFunctions.php');
 		   			<h1>Claim Item</h1>
 		   			<?php
 		   			# Display information for specified item
-		   			if($_SERVER['REQUEST_METHOD'] == 'GET') {
-		   				if(isset($_GET['id'])) {
-		   					$id = $_GET['id'];
-			   				update_status($dbc, $id, "claimed");
-
-		   				}
-		   				if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
-		   					if(isset($_POST['id'])) {
-								$id = $_POST['id'];
-						
-								$status = check_status($dbc, $_GET['id']);
-								if ($status == 'lost'){
-									claim_item($dbc, $id, $fname, $lname, 1);
-								}else if($status == 'found'){
-									claim_item($dbc, $id, $fname, $lname, 0);
-								}
-
-  								update_status($dbc, $id, 'claimed');
-								echo '<div id="content_area"><h2>Item Updated</h2></div>';
-							}
+		   			if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
+						$fname = $_POST['fname'];
+						$lname = $_POST['lname'];
+						$status = check_status($dbc, $id);
+					
+						if ($status == 'lost'){
+							claim_item($dbc, $id, $fname, $lname, 1);
+						}else if($status == 'found'){
+							claim_item($dbc, $id, $fname, $lname, 0);
 						}
 
-					
-		   			}
+						update_status($dbc, $id, 'claimed');
+						echo '<div id="content_area"><h2>Item Updated</h2></div>';
+					}
 		   			#Close database connection
 		   			mysqli_close($dbc);
 		   			?>
 				  	<br/><br/>
-					<form>
-		   				<input id="button" method="POST" type="Submit" value="Claim">
-		   			</form>
+					<div id="entryform">
+		   				<h1> Claim Items </h1>
+						<p>Claim items found on the limbo site</p>
+						<p>* = Required Field</p>
+		   				<form action="viewitem.php" method="POST">
+		   					<br>*First Name:<br>
+					  		<input id="text" name="fname" value="<?php if(isset($_GET['fname'])) echo $_GET['fname'];?>">
+					  		<br>*Last Name:<br>
+					  		<input id="text" name="lname" value="<?php if(isset($_GET['lname'])) echo $_GET['lname'];?>">
+					  		<br>Contact Number:<br>
+					  		<input id="text" name="CB_NUM" value="<?php if(isset($_GET['CB_NUM'])) echo $_GET['CB_NUM'];?>">
+					  		<br><br>
+							<input type="hidden" name="id" value=<?php echo $_GET['id']; ?>>
+			   				<input id="button" name="claim" type="Submit" value="Claim">
+			   			</form> 
+	   				</div>
 	  			</div>
 	  		</div>
 	  		<!-- footer -->

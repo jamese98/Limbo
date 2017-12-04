@@ -14,6 +14,9 @@ require('../scripts/connect_db.php');
 require('../scripts/limboFunctions.php');
 require('../scripts/showRecord.php');
 require('../scripts/redirect.php');
+
+# Display information for specified item
+
 ?>
 	<head>
 		<meta charset = "utf-8">
@@ -46,46 +49,69 @@ require('../scripts/redirect.php');
 	  		<div id="content_area">
 		   		<div id="iteminfo">
 		   			<h1>Item Info</h1>
-		   			<?php
-		   			# Display information for specified item
-		   			if($_SERVER['REQUEST_METHOD'] == 'GET') {
-		   				if(isset($_GET['id'])) {
-		   					show_record($dbc, $_GET['id']);
-		   				}
-		   			}
-
-		   			if($_SERVER['REQUEST_METHOD'] == 'POST'){ 
-		   				if(isset($_POST['id'])) {
-							$id = $_POST['id'];
-						
-							$status = check_status($dbc, $_GET['id']);
-							if ($status == 'lost'){
-								claim_item($dbc, $id, $fname, $lname, 1);
-							}else if($status == 'found'){
-								claim_item($dbc, $id, $fname, $lname, 0);
-							}
-
-							update_status($dbc, $id, 'claimed');
-							echo '<div id="content_area"><h2>Item Updated</h2></div>';
+		   				<?php
+						if($_SERVER['REQUEST_METHOD'] == 'GET') {
+							if(isset($_GET['id'])) {
+								$id = $_GET['id'];
+								show_record($dbc, $id);
+							
 							}
 						}
-
-		   			#Close database connection
-		   			mysqli_close($dbc);
-		   			?>
+						?>
+		   			
 		   			<div id="entryform">
 		   				<h1> Claim Items </h1>
 						<p>Claim items found on the limbo site</p>
 						<p>* = Required Field</p>
+						<?php
+
+
+						if(isset($_POST['claim'])){
+							$fname = $_POST['fname'];
+							$lname = $_POST['lname'];
+							$id = $_POST['id'];
+							$status = 'found';
+
+							// if ($status == 'lost'){
+							// 	claim_item($dbc, $id, $fname, $lname, 1);
+							// }else if($status == 'found'){
+								claim_item($dbc, $id, $fname, $lname, 0);
+							// }
+					
+							// update_status($dbc, $id, 'claimed');
+
+							 
+							// $page = 'viewitem.php?id='. $id;
+							// redirect($page);
+							echo $status;
+								
+						}
+
+						function claim_item($dbc, $id, $fname, $lname, $namechange) {
+						  if ($namechange == 0){
+						   $query = "UPDATE stuff SET finder_fname ='" . $fname . "' AND finder_lname ='" . $lname . "' WHERE id ='" .$id . "'";
+						  }else if ($namechange == 1){
+						    $query = "UPDATE stuff SET owner_fname = '" . $fname . "' AND owner_lname ='" . $lname . "' WHERE id ='" .$id . "'";
+						    }
+						  $result = mysqli_query( $dbc , $query );
+						  check_results($result);
+
+						}
+							
+
+
+						#Close database connection
+						mysqli_close($dbc);
+						?>
 		   				<form action="viewitem.php" method="POST">
 		   					<br>*First Name:<br>
-					  		<input id="text" name="fname" value="<?php if(isset($_GET['fname'])) echo $_GET['fname'];?>">
+					  		<input id="text" name="fname" value="<?php if(isset($_GET['fname'])) echo $_GET['fname'];?>" required>
 					  		<br>*Last Name:<br>
-					  		<input id="text" name="lname" value="<?php if(isset($_GET['lname'])) echo $_GET['lname'];?>">
+					  		<input id="text" name="lname" value="<?php if(isset($_GET['lname'])) echo $_GET['lname'];?>" required>
 					  		<br>Contact Number:<br>
 					  		<input id="text" name="CB_NUM" value="<?php if(isset($_GET['CB_NUM'])) echo $_GET['CB_NUM'];?>">
 					  		<br><br>
-							<input type="hidden" name="id" value=<?php echo $_GET['id']; ?>>
+							<input type="hidden" name="id" value="<?php echo $_GET['id'];?>">
 			   				<input id="button" name="claim" type="Submit" value="Claim">
 			   			</form> 
 	   				</div>
