@@ -5,9 +5,10 @@ Version 0.1 -->
 
 <!DOCTYPE HTML>
 <?php
-ini_set('display_errors', TRUE);
-error_reporting(E_ALL);
+// ini_set('display_errors', TRUE);
+// error_reporting(E_ALL);
 
+//includes the input record script
 require('../scripts/inputRecord.php');
 ?>
 <html>
@@ -47,12 +48,15 @@ require('../scripts/inputRecord.php');
 					<p>* = Required Field</p>
 					<form action="manageAdmins.php" method="POST">
 					  	<br>*Username:<br>
+					  	<!-- Creates a sticky textbox for username and holds the username value -->
 					  	<input id="text" name="username" value="<?php if(isset($_POST['username'])) echo $_POST['username'];?>">
 						<br>*Password:<br>
+						<!-- holds the password value untill submited -->
 					  	<input id="text" type="password" name="password1">
 					  	<br>*Confirm Password:<br>
 					  	<input id="text" type="password" name="password2">
 					  	<br><br>
+					  	<!-- Submits the formn and re loads the page -->
 					  	<input id="button" type="submit" value="Submit">
 	  				</form> 
 	   			 </div>

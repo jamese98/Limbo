@@ -6,6 +6,8 @@ Version 0.1 -->
 <!DOCTYPE HTML>
 <html>
 <?php
+ini_set('display_errors', TRUE);
+error_reporting(E_ALL);
 # Required PHP files to include
 require('../scripts/connect_db.php');
 require('../scripts/limboFunctions.php');

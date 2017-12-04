@@ -12,6 +12,7 @@ require('../scripts/inputRecord.php');
 
 if($_SERVER['REQUEST_METHOD'] == 'GET') {
 	$status = $_GET['status'];
+	// call the record controller to input the record
 	record_ctrl($status);
 
 }
