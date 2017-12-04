@@ -25,29 +25,35 @@ function update_status($dbc, $id, $status) {
   mysqli_query($dbc, $query);
 }
 
-# Updates the status of an item in the database; used by the admin page
-function claim_item($dbc, $id, $fname, $lname, $statID) {
-  if ($statID == 0){
-   $query = "UPDATE stuff SET finder_fname = '" . $fname . "', finder_lname ='" . $lname . "' WHERE id ='" . $id . "'";
-  }else if ($statID == 1){
-   $query = "UPDATE stuff SET owner_fname = '" . $fname . "', owner_lname ='" . $lname . "' WHERE id ='" . $id . "'";
+#Changes the value of a records status to claimed
+function claim_item($dbc, $id, $fname, $lname, $CB_NUM, $statID) {
+  # if the record is claimed and found insert the finders information
+  if(empty($CB_NUM)){
+    $CB_NUM = 'Null';
   }
+  if ($statID == 0){
+   $query = "UPDATE stuff SET finder_fname = '" . $fname . "', finder_lname ='" . $lname . "', claim_contact = '". $CB_NUM ."'WHERE id ='" . $id . "'";
+   # if the record is claimed and lost insert the owners information
+  }else if ($statID == 1){
+   $query = "UPDATE stuff SET owner_fname = '" . $fname . "', owner_lname ='" . $lname . "' , claim_contact = '". $CB_NUM . "'WHERE id ='" . $id . "'";
+  }
+  #run the query and set the output to the result var
   $result = mysqli_query( $dbc , $query );
+  #check wether the query ran into any errors
   check_results($result);
+  #if everything worked alert the user that the item gas been updated
   echo "Item Updated";
-
-}          
+}                 
 
 # Returns status of item with specified id
 function check_status($dbc, $id) {
   # Create and execute query to update status of item with specified id
   $query = 'SELECT status FROM stuff WHERE id = ' . $id;
-  console_log($query);
-  $result = mysqli_query($dbc, $query);
-  console_log($result);
-  check_results($result);
+  $results = mysqli_query($dbc, $query);
+  check_results($results);
+  $row = mysqli_fetch_array($results, MYSQLI_ASSOC);
 
-  return $result;
+  return $row['status'];
 }
 
 

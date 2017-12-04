@@ -53,6 +53,7 @@ require('../scripts/redirect.php');
 						if($_SERVER['REQUEST_METHOD'] == 'GET') {
 							if(isset($_GET['id'])) {
 								$id = $_GET['id'];
+								// Output the information for items
 								show_record($dbc, $id);
 							
 							}
@@ -65,29 +66,34 @@ require('../scripts/redirect.php');
 						<?php
 
 
+						// If the claim button is pressed
 						if(isset($_POST['claim'])){
-							console_log($_POST);
+							// get all values from the form
 							$fname = $_POST['fname'];
 							$lname = $_POST['lname'];
 							$id = $_POST['id'];
+							$CB_NUM = $_POST['CB_NUM'];
+							// run a query to find the status
 							$status = check_status($dbc, $id);
-
 							if ($status == 'lost'){
-								claim_item($dbc, $id, $fname, $lname, 0);
-								echo "lost";
-							}else if($status == 'found'){
-								claim_item($dbc, $id, $fname, $lname, 1);
-								echo "found";
-							}
+								// Submit claimed info into the record
+								claim_item($dbc, $id, $fname, $lname, $CB_NUM, 0);
+								$page = 'lostitems.php';
 					
-							// update_status($dbc, $id, 'claimed');
-
+							}else if($status == 'found'){
+								// Submit claimed info into the record
+								claim_item($dbc, $id, $fname, $lname, $CB_NUM, 1);
+								$page = 'founditems.php';
+							}
+							// Change status to cliamed
+							update_status($dbc, $id, 'claimed');
+							// Set page to the current page with the value of the last id
 							
-								
+							// relaod the page
+							redirect($page);
+							// alert the users
+							echo "Item Updated";
 						}
-
-
-
 						#Close database connection
 						mysqli_close($dbc);
 						?>
@@ -102,7 +108,6 @@ require('../scripts/redirect.php');
 							<input type="hidden" name="id" value="<?php echo $_GET['id'];?>">
 			   				<input id="button" name="claim" type="Submit" value="Claim">
 			   			</form> 
-	   			
 	  			</div>
 	  		</div>
 	  		<!-- footer -->
